@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Hello</h1>
+<h1>Все люди</h1>
+<form method="post" th:action="${'/human/filter'}">
+  <input type="text" name="lastName">
+  <button type="submit">Найти</button>
+  <table  border="1" >
+    <tr><th>Фамилия</th><th>рост</th><th>Мужчина</th><th>Дата рождения</th><th>Вес</th></tr> <!--ряд с ячейками заголовков-->
+    <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr> <!--ряд с ячейками тела таблицы-->
+  </table>
+</form>
+<table  border="1" >
+  <tr><th>Фамилия</th><th>рост</th><th>Мужчина</th><th>Дата рождения</th><th>Вес</th></tr> <!--ряд с ячейками заголовков-->
+  <tr th:each="el : ${humans}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr> <!--ряд с ячейками тела таблицы-->
+</table>
+<p></p>
+  <form th:action="${'/human/add'}" method="post">
+    <input type="text" name="lastName" placeholder="Введите Фамилию">
+    <input type="number" name="height" placeholder="Рост"></input>
+    <input type="checkbox" name="gender" placeholder="Вы мужчина?">
+    <input type="date" name="birthday" placeholder="День рождения">
+    <input type="number" name="weight" placeholder="Вес">
+    <br>
+    <button type="submit">Добавить челика</button>
+  </form>
+<p></p>
+</body>
+</html>

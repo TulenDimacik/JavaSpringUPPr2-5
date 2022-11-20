@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Добавление новой статьи</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form th:action="${'/blog/add'}" method="post">
+  <input type="number" name="title" placeholder="Введите double статьи">
+  <input type="checkbox" name="anons" placeholder="Анонсировано или нет">
+  <textarea name="full_text" placeholder="Введите текст статьи"></textarea>
+  <input type="date" name="dateAnons" placeholder="Дата статьи">
+  <input type="number" name="countReaders" placeholder="Количество читателей">
+  <br>
+  <button type="submit">Добавить статью</button>
+</form>
+</body>
+</html>

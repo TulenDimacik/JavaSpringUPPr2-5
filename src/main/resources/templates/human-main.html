@@ -7,17 +7,24 @@
 <body>
 <h1>Hello</h1>
 <h1>Все люди</h1>
-<form method="post" th:action="${'/human/filter'}">
-  <input type="text" name="lastName">
-  <button type="submit">Найти</button>
-  <table  border="1" >
-    <tr><th>Фамилия</th><th>рост</th><th>Мужчина</th><th>Дата рождения</th><th>Вес</th></tr> <!--ряд с ячейками заголовков-->
-    <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr> <!--ряд с ячейками тела таблицы-->
-  </table>
+<!--<form method="post" th:action="${'/human/filter'}">-->
+<!--  <input type="text" name="lastName">-->
+<!--  <button type="submit">Найти</button>-->
+<!--  <table  border="1" >-->
+<!--    <tr><th>Фамилия</th><th>рост</th><th>Мужчина</th><th>Дата рождения</th><th>Вес</th></tr> &lt;!&ndash;ряд с ячейками заголовков&ndash;&gt;-->
+<!--    <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr> &lt;!&ndash;ряд с ячейками тела таблицы&ndash;&gt;-->
+<!--  </table>-->
+<!--</form>-->
+<form method="post"  th:action="${'/human/filter'}">
+<input type="text" name="lastName">
 </form>
 <table  border="1" >
   <tr><th>Фамилия</th><th>рост</th><th>Мужчина</th><th>Дата рождения</th><th>Вес</th></tr> <!--ряд с ячейками заголовков-->
-  <tr th:each="el : ${humans}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr> <!--ряд с ячейками тела таблицы-->
+  <tr th:each="el : ${humans}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr>
+  <form method="post" th:action="${'/human/filter'}">
+    <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr>
+  </form>
+
 </table>
 <p></p>
   <form th:action="${'/human/add'}" method="post">

@@ -11,5 +11,6 @@ public interface HumanRepository extends CrudRepository<Human, Long> {
     List<Human> findByLastNameIsContaining(String lastName);
     List<Human> findByLastNameContaining(String lastName);
     List<Human> findByLastNameEquals(String lastName);
+    //List<Human> findByWeightContains(Double weight);
 
 }

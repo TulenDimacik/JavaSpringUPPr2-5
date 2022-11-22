@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Редактирование статьи</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div th:each="el: ${post}">
+  <form method="post">
+    <input type="number" th:value="${el.title}" name="title" placeholder="Введите title">
+    <input type="checkbox" th:checked="${el.anons}" name="anons">
+    <input type="date" th:value="${el.dateAnons}" name="dateAnons" placeholder="Введите date">
+    <textarea type="text" th:text="${el.full_text}" name="full_text" ></textarea>
+    <input type="number" th:value="${el.countReaders}" name="countReaders" placeholder="Введите countReaders">
+    <br>
+    <button type="submit">Сохранить изменения</button>
+  </form>
+</div>
+</body>
+</html>

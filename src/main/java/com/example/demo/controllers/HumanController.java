@@ -43,8 +43,8 @@ public class HumanController {
     @PostMapping("/human/filter")
     public String blogResult(@RequestParam(defaultValue = "") String lastName, Model model)
     {
-       //List<Human> result = humanRepository.findByLastNameContains(lastName);
-        List<Human> result = humanRepository.findByLastNameEquals(lastName);
+       List<Human> result = humanRepository.findByLastNameContains(lastName);
+        //List<Human> result = humanRepository.findByWeightContains(weight);
         model.addAttribute("result", result);
         return "human-main";
     }

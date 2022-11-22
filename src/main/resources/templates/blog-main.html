@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+<div th:insert="blocks/header"></div>
 <h1>Все статьи</h1>
 <a href="/blog/filter">Поиск статей</a>
 <a href="/blog/add">Добавить статью</a>
@@ -15,6 +16,9 @@
     <a th:text="${el.title}"></a>
     <a th:text="${el.full_text}"></a>
     <a th:text="${el.countReaders}"></a>
+    <br>
+    <a th:href="'/blog/' + ${el.id}">Подробнее</a>
 </div>
 </body>
 </html>
+

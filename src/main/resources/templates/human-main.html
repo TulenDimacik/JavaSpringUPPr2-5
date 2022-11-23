@@ -3,39 +3,60 @@
 <head>
   <title>Getting Started: Serving Web Content</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <div th:insert="blocks/header" ></div>
 </head>
 <body>
-<h1>Hello</h1>
-<h1>Все люди</h1>
-<!--<form method="post" th:action="${'/human/filter'}">-->
-<!--  <input type="text" name="lastName">-->
-<!--  <button type="submit">Найти</button>-->
-<!--  <table  border="1" >-->
-<!--    <tr><th>Фамилия</th><th>рост</th><th>Мужчина</th><th>Дата рождения</th><th>Вес</th></tr> &lt;!&ndash;ряд с ячейками заголовков&ndash;&gt;-->
-<!--    <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr> &lt;!&ndash;ряд с ячейками тела таблицы&ndash;&gt;-->
-<!--  </table>-->
-<!--</form>-->
+<div class=ex1><h1>Люди</h1></div>
 <form method="post"  th:action="${'/human/filter'}">
-<input type="text" name="lastName">
+  <input type="text" name="lastName" placeholder="Поиск">
+  <button type="submit">Найти</button>
 </form>
-<table  border="1" >
-  <tr><th>Фамилия</th><th>рост</th><th>Мужчина</th><th>Дата рождения</th><th>Вес</th></tr> <!--ряд с ячейками заголовков-->
-  <tr th:each="el : ${humans}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr>
+<table  border="1" class="styled-table">
+  <tr>
+    <th>Фамилия</th>
+    <th>рост</th>
+    <th>Мужчина</th>
+    <th>Дата рождения</th>
+    <th>Вес</th>
+  </tr> <!--ряд с ячейками заголовков-->
+  <tr th:each="el : ${humans}">
+    <td th:text="${el.lastName}"></td>
+    <td th:text="${el.height}"></td>
+    <td th:text="${el.gender}" ></td>
+    <td th:text="${el.birthday}"></td>
+    <td th:text="${el.weight}"></td>
+    <td><a th:href="'/human/' + ${el.id} + '/edit'" class="edit">Редактировать</a></td>
+    <td><a th:href="'/human/' + ${el.id} + '/remove'" class="delete">Удалить</a></td>
+  </tr>
   <form method="post" th:action="${'/human/filter'}">
     <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr>
   </form>
-
+  <form th:action="${'/human/add'}"  method="post">
+  <tr>
+    <td><input type="text" name="lastName" placeholder="Введите Фамилию" ></td>
+    <td><input type="number" name="height" placeholder="Рост"></td>
+    <td><input type="checkbox" name="gender" placeholder="Вы мужчина?"></td>
+    <td><input type="date" name="birthday" placeholder="День рождения"></td>
+    <td><input type="number" name="weight" placeholder="Вес"></td>
+    <td><button type="submit">Добавить челика</button></td>
+  </tr>
+  </form>
 </table>
 <p></p>
-  <form th:action="${'/human/add'}" method="post">
-    <input type="text" name="lastName" placeholder="Введите Фамилию">
-    <input type="number" name="height" placeholder="Рост"></input>
-    <input type="checkbox" name="gender" placeholder="Вы мужчина?">
-    <input type="date" name="birthday" placeholder="День рождения">
-    <input type="number" name="weight" placeholder="Вес">
+  <form method="post" th:each="el: ${human}" align="Center">
+    <h1>Редактирование</h1>
     <br>
-    <button type="submit">Добавить челика</button>
+    <input type="text" name="lastName" placeholder="Введите Фамилию" th:value="${el.lastName}">
+    <input type="number" name="height" placeholder="Рост" th:value="${el.height}"></input>
+    <input type="checkbox" name="gender" placeholder="Вы мужчина?" th:checked="${el.gender}">
+    <input type="date" name="birthday" placeholder="День рождения" th:value="${el.birthday}">
+    <input type="number" name="weight" placeholder="Вес" th:value="${el.weight}">
+    <button type="submit">Изменить</button>
   </form>
 <p></p>
 </body>
+<footer>
+  <div th:insert="blocks/footer" ></div>
+</footer>
 </html>

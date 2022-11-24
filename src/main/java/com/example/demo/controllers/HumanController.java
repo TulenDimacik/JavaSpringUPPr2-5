@@ -21,7 +21,7 @@ public class HumanController {
     private HumanRepository humanRepository;
 
     @GetMapping("/human")
-    public String blogMain(Model model)
+    public String humanMain(Model model)
     {
         Iterable<Human> humans = humanRepository.findAll();
         model.addAttribute("humans", humans);
@@ -29,37 +29,23 @@ public class HumanController {
     }
 
 
+    @GetMapping("/human/add")
+    public String humanAdd(@ModelAttribute("humans") Human human)
+    {
+        return "human-add";
+    }
 
-//    @PostMapping("/human/add")
-//    public String blogPostAdd(@RequestParam(defaultValue = "")  String lastName,
-//                              @RequestParam(defaultValue = "0") float height,
-//                              @RequestParam(defaultValue = "false")  boolean gender,
-//                              @RequestParam(defaultValue = "10.10.2010") Date birthday,
-//                              @RequestParam(defaultValue = "0")  double weight,
-//                              Model model)
-//    {
-//        Human human = new Human(lastName, height, gender,birthday,weight);
-//        humanRepository.save(human);
-//        return "redirect:/human";
-//    }
-
-//    @GetMapping("/human/add")
-//    public String blogAdd(@ModelAttribute("humanadd") Human human)
-//    {
-//        return "human-main";
-//    }
-
-    @PostMapping("/human")
-    public String blogPostAdd(@ModelAttribute("humanadd") @Valid Human human, BindingResult bindingResult)
+    @PostMapping("/human/add")
+    public String humanPostAdd(@ModelAttribute("humans") @Valid Human human, BindingResult bindingResult)
     {
         if(bindingResult.hasErrors())
-            return "human-main";
+            return "human-add";
         humanRepository.save(human);
         return "redirect:/human";
     }
 
     @PostMapping("/human/filter")
-    public String blogResult(@RequestParam(defaultValue = "") String lastName, Model model)
+    public String humanResult(@RequestParam(defaultValue = "") String lastName, Model model)
     {
         List<Human> result = humanRepository.findByLastNameContains(lastName);
         //List<Human> result = humanRepository.findByWeightContains(weight);
@@ -69,55 +55,30 @@ public class HumanController {
 
 
     @GetMapping("/human/{id}/edit")
-    public  String HumanDetails(@PathVariable(value = "id") long id, Model model)
+    public  String humanDetails(@PathVariable(value = "id") long id, Model model)
     {
-        Optional<Human> post = humanRepository.findById(id);
-        ArrayList<Human> res = new ArrayList<>();
-        post.ifPresent(res::add);
-        model.addAttribute("human",res);
-        if(!humanRepository.existsById(id))
-        {
-            return  "redirect:/human";
-        }
-        return "human-main";
+
+        Human res1 = humanRepository.findById(id).orElseThrow();
+        model.addAttribute("human",res1);
+        return "human-edit";
     }
 
 
     @PostMapping ("/human/{id}/edit")
-    public  String HumanPostUpdate(@PathVariable(value = "id") long id,
-                                   @RequestParam(defaultValue = "")  String lastName,
-                                   @RequestParam(defaultValue = "0") float height,
-                                   @RequestParam(defaultValue = "false")  boolean gender,
-                                   @RequestParam(defaultValue = "10.10.2010") Date birthday,
-                                   @RequestParam(defaultValue = "0")  double weight,
-                                   Model model)
+    public  String humanUpdate(@ModelAttribute("human") @Valid Human human,
+                               BindingResult bindingResult,
+                               @PathVariable(value = "id") long id)
     {
-        Human human = humanRepository.findById(id).orElseThrow();
-        human.setLastName(lastName);
-        human.setHeight(height);
-        human.setGender(gender);
-        human.setBirthday(birthday);
-        human.setWeight(weight);
+        if(bindingResult.hasErrors())
+            return "human-edit";
         humanRepository.save(human);
         return "redirect:/human";
     }
 
 
     @GetMapping("/human/{id}/remove")
-    public  String HumanDelDetails(@PathVariable(value = "id") long id, Model model)
+    public  String humanDelete(@PathVariable(value = "id") long id, Model model)
     {
-        Optional<Human> post = humanRepository.findById(id);
-        ArrayList<Human> res = new ArrayList<>();
-        post.ifPresent(res::add);
-        model.addAttribute("human",res);
-        if(!humanRepository.existsById(id))
-        {
-            return  "redirect:/human";
-        }
-        return HumanDelete(id,model);
-    }
-    @PostMapping("/human/{id}/remove")
-    public String HumanDelete(@PathVariable(value = "id") long id, Model model){
         Human human = humanRepository.findById(id).orElseThrow();
         humanRepository.delete(human);
         return "redirect:/human";

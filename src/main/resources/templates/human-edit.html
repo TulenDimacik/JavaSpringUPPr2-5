@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div class=ex1><h1>Редактирование человека</h1></div>
+<form method="post" th:object="${human}">
+    <table border="1" class="styled-table">
+        <tr>
+            <th>Фамилия</th>
+            <th>рост</th>
+            <th>Мужчина</th>
+            <th>Дата рождения</th>
+            <th>Вес</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="lastName" placeholder="Введите Фамилию" th:field="*{lastName}" id="lastName" th:value="${lastName}" >
+                <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
+            </td>
+            <td>
+                <input type="number" name="height" placeholder="Рост" th:field="*{height}" id="height" th:value="${height}">
+                <div style="color: red" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"/>
+            </td>
+            <td>
+                <input type="checkbox" name="gender" placeholder="Вы мужчина?" th:field="*{gender}" id="gender" th:value="${gender}">
+                <div style="color: red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"/>
+            </td>
+            <td>
+                <input type="date" placeholder="День рождения" id="birthday" th:field="*{birthday}" th:value="${birthday}">
+                <div style="color: red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"/>
+            </td>
+            <td>
+                <input type="number" placeholder="Вес" id="weight" th:field="*{weight}" th:value="${weight}">
+                <div style="color: red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" th:value="${weight}"/>
+            </td>
+        </tr>
+
+    </table>
+    <div align="center"><button type="submit" class="green">Изменить челика</button></div>
+</form>
+</body>
+</html>

@@ -5,12 +5,49 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<form th:action="${'/blog/add'}" method="post">
-  <input type="number" name="title" placeholder="Введите double статьи">
-  <input type="checkbox" name="anons" placeholder="Анонсировано или нет">
-  <textarea name="full_text" placeholder="Введите текст статьи"></textarea>
-  <input type="date" name="dateAnons" placeholder="Дата статьи">
-  <input type="number" name="countReaders" placeholder="Количество читателей">
+<!--<form th:action="${'/blog/add'}" method="post">-->
+<!--  <input type="number" name="title" placeholder="Введите double статьи">-->
+<!--  <input type="checkbox" name="anons" placeholder="Анонсировано или нет">-->
+<!--  <textarea name="full_text" placeholder="Введите текст статьи"></textarea>-->
+<!--  <input type="date" name="dateAnons" placeholder="Дата статьи">-->
+<!--  <input type="number" name="countReaders" placeholder="Количество читателей">-->
+<!--  <br>-->
+<!--  <button type="submit">Добавить статью</button>-->
+<!--</form>-->
+<form th:action="${'/blog/add'}" method="post" th:object="${posts}">
+  <table>
+    <tr>
+      <td>
+  <div>
+  <input type="number" th:field="*{title}" placeholder="Введите double статьи">
+    <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>
+  </div>
+      </td>
+      <td>
+  <div>
+  <input type="checkbox" th:field="*{anons}" placeholder="Анонсировано или нет">
+  </div>
+      </td>
+      <td>
+  <div>
+  <input th:field="*{full_text}" placeholder="Введите текст статьи"></input>
+    <div style="color: red" th:if="${#fields.hasErrors('full_text')}" th:errors="*{full_text}"></div>
+  </div>
+      </td>
+      <td>
+  <div>
+  <input type="date" th:field="*{dateAnons}" placeholder="Дата статьи">
+      <div style="color: red" th:if="${#fields.hasErrors('dateAnons')}" th:errors="*{dateAnons}"></div>
+  </div>
+      </td>
+      <td>
+  <div>
+  <input type="number" th:field="*{countReaders}" placeholder="Количество читателей">
+    <div style="color: red" th:if="${#fields.hasErrors('countReaders')}" th:errors="*{countReaders}"></div>
+  </div>
+      </td>
+    </tr>
+  </table>
   <br>
   <button type="submit">Добавить статью</button>
 </form>

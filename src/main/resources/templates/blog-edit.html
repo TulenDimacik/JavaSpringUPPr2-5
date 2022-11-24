@@ -5,16 +5,66 @@
   <meta charset="UTF-8">
 </head>
 <body>
-<div th:each="el: ${post}">
-  <form method="post">
-    <input type="number" th:value="${el.title}" name="title" placeholder="Введите title">
-    <input type="checkbox" th:checked="${el.anons}" name="anons">
-    <input type="date" th:value="${el.dateAnons}" name="dateAnons" placeholder="Введите date">
-    <textarea type="text" th:text="${el.full_text}" name="full_text" ></textarea>
-    <input type="number" th:value="${el.countReaders}" name="countReaders" placeholder="Введите countReaders">
+<div>
+  <form method="post" th:object="${post}">
+    <table>
+      <tr>
+        <td>
+          <div>
+            <input type="text" th:field="*{title}" id="title" th:value="${title}"  />
+            <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>
+          </div>
+        </td>
+        <td>
+          <div>
+            <input type="checkbox" id="anons" th:field="*{anons}" placeholder="Анонсировано или нет" th:checked="${anons}">
+          </div>
+        </td>
+        <td>
+          <div>
+            <input th:field="*{full_text}" placeholder="Введите текст статьи" th:value="${full_text}" id="full_text"></input>
+            <div style="color: red" th:if="${#fields.hasErrors('full_text')}" th:errors="*{full_text}" ></div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <input type="date" th:field="*{dateAnons}" placeholder="Дата статьи" th:value="${dateAnons}" id="dateAnons">
+            <div style="color: red" th:if="${#fields.hasErrors('dateAnons')}" th:errors="*{dateAnons}"></div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <input type="number" th:field="*{countReaders}" placeholder="Количество читателей" th:value="${countReaders}" id="countReaders">
+            <div style="color: red" th:if="${#fields.hasErrors('countReaders')}" th:errors="*{countReaders}"></div>
+          </div>
+        </td>
+      </tr>
+    </table>
     <br>
     <button type="submit">Сохранить изменения</button>
   </form>
 </div>
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">-->
+<!--<head>-->
+<!--  <title>Редактирование статьи</title>-->
+<!--  <meta charset="UTF-8">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:each="el: ${post}">-->
+<!--  <form method="post" >-->
+<!--    <input type="number" th:value="${el.title}"   name="title" placeholder="Введите title">-->
+<!--    <input type="checkbox" th:checked="${el.anons}" name="anons">-->
+<!--    <input type="date" th:value="${el.dateAnons}" name="dateAnons" placeholder="Введите date">-->
+<!--    <textarea type="text" th:text="${el.full_text}" name="full_text" ></textarea>-->
+<!--    <input type="number" th:value="${el.countReaders}" name="countReaders" placeholder="Введите countReaders">-->
+<!--    <br>-->
+<!--    <button type="submit">Сохранить изменения</button>-->
+<!--  </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

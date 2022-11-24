@@ -6,11 +6,10 @@ import com.example.demo.repo.HumanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +30,30 @@ public class HumanController {
 
 
 
-    @PostMapping("/human/add")
-    public String blogPostAdd(@RequestParam(defaultValue = "")  String lastName,
-                              @RequestParam(defaultValue = "0") float height,
-                              @RequestParam(defaultValue = "false")  boolean gender,
-                              @RequestParam(defaultValue = "10.10.2010") Date birthday,
-                              @RequestParam(defaultValue = "0")  double weight,
-                              Model model)
+//    @PostMapping("/human/add")
+//    public String blogPostAdd(@RequestParam(defaultValue = "")  String lastName,
+//                              @RequestParam(defaultValue = "0") float height,
+//                              @RequestParam(defaultValue = "false")  boolean gender,
+//                              @RequestParam(defaultValue = "10.10.2010") Date birthday,
+//                              @RequestParam(defaultValue = "0")  double weight,
+//                              Model model)
+//    {
+//        Human human = new Human(lastName, height, gender,birthday,weight);
+//        humanRepository.save(human);
+//        return "redirect:/human";
+//    }
+
+//    @GetMapping("/human/add")
+//    public String blogAdd(@ModelAttribute("humanadd") Human human)
+//    {
+//        return "human-main";
+//    }
+
+    @PostMapping("/human")
+    public String blogPostAdd(@ModelAttribute("humanadd") @Valid Human human, BindingResult bindingResult)
     {
-        Human human = new Human(lastName, height, gender,birthday,weight);
+        if(bindingResult.hasErrors())
+            return "human-main";
         humanRepository.save(human);
         return "redirect:/human";
     }
@@ -47,7 +61,7 @@ public class HumanController {
     @PostMapping("/human/filter")
     public String blogResult(@RequestParam(defaultValue = "") String lastName, Model model)
     {
-       List<Human> result = humanRepository.findByLastNameContains(lastName);
+        List<Human> result = humanRepository.findByLastNameContains(lastName);
         //List<Human> result = humanRepository.findByWeightContains(weight);
         model.addAttribute("result", result);
         return "human-main";
@@ -71,12 +85,12 @@ public class HumanController {
 
     @PostMapping ("/human/{id}/edit")
     public  String HumanPostUpdate(@PathVariable(value = "id") long id,
-                                  @RequestParam(defaultValue = "")  String lastName,
-                                  @RequestParam(defaultValue = "0") float height,
-                                  @RequestParam(defaultValue = "false")  boolean gender,
-                                  @RequestParam(defaultValue = "10.10.2010") Date birthday,
-                                  @RequestParam(defaultValue = "0")  double weight,
-                                  Model model)
+                                   @RequestParam(defaultValue = "")  String lastName,
+                                   @RequestParam(defaultValue = "0") float height,
+                                   @RequestParam(defaultValue = "false")  boolean gender,
+                                   @RequestParam(defaultValue = "10.10.2010") Date birthday,
+                                   @RequestParam(defaultValue = "0")  double weight,
+                                   Model model)
     {
         Human human = humanRepository.findById(id).orElseThrow();
         human.setLastName(lastName);

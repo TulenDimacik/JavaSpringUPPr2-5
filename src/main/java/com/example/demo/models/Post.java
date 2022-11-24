@@ -1,9 +1,13 @@
 package com.example.demo.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
+
 import java.sql.Date;
 
 @Entity
@@ -23,10 +27,19 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Please enter name")
+    @Size(min=4, message = "Name should be atleast 4 characters")
+    @Size(max=10, message = "Name should not be greater than 10 characters")
     private String  full_text;
+    @NotNull(message = "Please enter salary")
+    @Min(value=1000, message = "Salary must be atleast 1000.00")
+    @Max(value=10000, message = "Salary should not be greater than 10000.00")
     private double title;
     private boolean anons;
+    @NotNull(message = "Заполните дату")
     private Date dateAnons;
+    @Min(value = 1, message = "Не меньше 1")
+    @Max(value = 10, message = "Не больше 10")
     private int countReaders;
     private int views;
 

@@ -1,3 +1,96 @@
+<!--<!DOCTYPE HTML>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>Getting Started: Serving Web Content</title>-->
+<!--  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+<!--  <link th:href="@{/css/site.css}" rel="stylesheet" />-->
+<!--  <div th:insert="blocks/header" ></div>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class=ex1><h1>Люди</h1></div>-->
+<!--<form method="post"  th:action="${'/human/filter'}">-->
+<!--  <input type="text" name="lastName" placeholder="Поиск">-->
+<!--  <button type="submit">Найти</button>-->
+<!--</form>-->
+<!--<table  border="1" class="styled-table">-->
+<!--  <tr>-->
+<!--    <th>Фамилия</th>-->
+<!--    <th>рост</th>-->
+<!--    <th>Мужчина</th>-->
+<!--    <th>Дата рождения</th>-->
+<!--    <th>Вес</th>-->
+<!--  </tr> &lt;!&ndash;ряд с ячейками заголовков&ndash;&gt;-->
+<!--  <tr th:each="el : ${human}">-->
+<!--    <td th:text="${el.lastName}"></td>-->
+<!--    <td th:text="${el.height}"></td>-->
+<!--    <td th:text="${el.gender}" ></td>-->
+<!--    <td th:text="${el.birthday}"></td>-->
+<!--    <td th:text="${el.weight}"></td>-->
+<!--    <td><a th:href="'/human/' + ${el.id} + '/edit'" class="edit">Редактировать</a></td>-->
+<!--    <td><a th:href="'/human/' + ${el.id} + '/remove'" class="delete">Удалить</a></td>-->
+<!--  </tr>-->
+<!--  <form method="post" th:action="${'/human/filter'}">-->
+<!--    <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr>-->
+<!--  </form>-->
+<!--  <form th:action="${'/human/add'}"  method="post" th:object="${human}">-->
+<!--&lt;!&ndash;  <tr >&ndash;&gt;-->
+<!--&lt;!&ndash;    <td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input th:field="*{lastName}" type="text" placeholder="Введите Фамилию" name="lastName">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;    <td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input th:field="*{height}" type="number" name="height" placeholder="Рост">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div style="color: red" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;    <td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <input th:field="*{gender}" type="checkbox" name="gender" placeholder="Вы мужчина?">&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;    <td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input th:field="*{birthday}" type="date" name="birthday" placeholder="День рождения">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div style="color: red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;    <td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input th:field="*{weight}" type="number" name="weight" placeholder="Вес">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div style="color: red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;    <td><button type="submit">Добавить челика</button></td>&ndash;&gt;-->
+<!--&lt;!&ndash;  </tr>&ndash;&gt;-->
+<!--    <td><input type="text" name="lastName" placeholder="Введите Фамилию" ></td>-->
+<!--    <td><input type="number" name="height" placeholder="Рост"></td>-->
+<!--    <td><input type="checkbox" name="gender" placeholder="Вы мужчина?"></td>-->
+<!--    <td><input type="date" name="birthday" placeholder="День рождения"></td>-->
+<!--    <td><input type="number" name="weight" placeholder="Вес"></td>-->
+<!--    <td><button type="submit">Добавить челика</button></td>-->
+<!--  </form>-->
+<!--</table>-->
+<!--<p></p>-->
+<!--  <form method="post" th:each="el: ${humans}" align="Center">-->
+<!--    <h1>Редактирование</h1>-->
+<!--    <br>-->
+<!--    <input type="text" name="lastName" placeholder="Введите Фамилию" th:value="${el.lastName}">-->
+<!--    <input type="number" name="height" placeholder="Рост" th:value="${el.height}"></input>-->
+<!--    <input type="checkbox" name="gender" placeholder="Вы мужчина?" th:checked="${el.gender}">-->
+<!--    <input type="date" name="birthday" placeholder="День рождения" th:value="${el.birthday}">-->
+<!--    <input type="number" name="weight" placeholder="Вес" th:value="${el.weight}">-->
+<!--    <button type="submit">Изменить</button>-->
+<!--  </form>-->
+<!--<p></p>-->
+<!--</body>-->
+<!--<footer>-->
+<!--  <div th:insert="blocks/footer" ></div>-->
+<!--</footer>-->
+<!--</html>-->
+
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -29,31 +122,62 @@
     <td><a th:href="'/human/' + ${el.id} + '/edit'" class="edit">Редактировать</a></td>
     <td><a th:href="'/human/' + ${el.id} + '/remove'" class="delete">Удалить</a></td>
   </tr>
-  <form method="post" th:action="${'/human/filter'}">
+
     <tr th:each="el : ${result}"><td th:text="${el.lastName}"></td><td th:text="${el.height}"></td><td th:text="${el.gender}" ></td><td th:text="${el.birthday}"></td><td th:text="${el.weight}"></td></tr>
   </form>
-  <form th:action="${'/human/add'}"  method="post">
-  <tr>
-    <td><input type="text" name="lastName" placeholder="Введите Фамилию" ></td>
-    <td><input type="number" name="height" placeholder="Рост"></td>
-    <td><input type="checkbox" name="gender" placeholder="Вы мужчина?"></td>
-    <td><input type="date" name="birthday" placeholder="День рождения"></td>
-    <td><input type="number" name="weight" placeholder="Вес"></td>
-    <td><button type="submit">Добавить челика</button></td>
-  </tr>
+  <form th:action="${'/human'}"  method="post" th:object="${humanadd}">
+    <input  type="text" name="lastName" placeholder="Введите Фамилию" >
+    <input  type="number" name="height" placeholder="Введите Фамилию" >
+
+    <input  type="date" name="birthday" placeholder="Введите Фамилию" >
+    <input  type="checkbox" name="gender" placeholder="Введите Фамилию" >
+    <input th:field="*{weight}" type="number" name="weight" placeholder="Введите Фамилию" >
+    <div style="color: red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+    <!--<tr>
+      <td>
+        <div>
+          <input  type="text" name="lastName" placeholder="Введите Фамилию" >
+          <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <input  type="number" name="height" placeholder="Рост">
+          <div style="color: red" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <input  type="checkbox" name="gender" placeholder="Вы мужчина?">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input  type="date" name="birthday" placeholder="День рождения">
+          <div style="color: red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <input  type="number" name="weight" placeholder="Вес">
+          <div style="color: red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+        </div>
+      </td>-->
+      <td><button type="submit">Добавить челика</button></td>
+    </tr>
   </form>
 </table>
 <p></p>
-  <form method="post" th:each="el: ${human}" align="Center">
-    <h1>Редактирование</h1>
-    <br>
-    <input type="text" name="lastName" placeholder="Введите Фамилию" th:value="${el.lastName}">
-    <input type="number" name="height" placeholder="Рост" th:value="${el.height}"></input>
-    <input type="checkbox" name="gender" placeholder="Вы мужчина?" th:checked="${el.gender}">
-    <input type="date" name="birthday" placeholder="День рождения" th:value="${el.birthday}">
-    <input type="number" name="weight" placeholder="Вес" th:value="${el.weight}">
-    <button type="submit">Изменить</button>
-  </form>
+<form method="post" th:each="el: ${human}" align="Center">
+  <h1>Редактирование</h1>
+  <br>
+  <input type="text" name="lastName" placeholder="Введите Фамилию" th:value="${el.lastName}">
+  <input type="number" name="height" placeholder="Рост"  th:value="${el.height}"></input>
+  <input type="checkbox" name="gender" placeholder="Вы мужчина?" th:checked="${el.gender}">
+  <input type="date" name="birthday" placeholder="День рождения" th:value="${el.birthday}">
+  <input type="number" name="weight" placeholder="Вес" th:value="${el.weight}">
+  <button type="submit">Изменить</button>
+</form>
 <p></p>
 </body>
 <footer>

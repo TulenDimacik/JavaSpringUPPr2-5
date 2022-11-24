@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 import java.sql.Date;
 
 @Entity
@@ -12,10 +13,19 @@ public class Human {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Введите фамилию")
+    @Size(min=2, message = "Фамилия не может быть меньше 2 букв")
     private String  lastName;
+    @NotNull(message = "Заполните рост")
+    @Min(value = 50, message = "Не меньше 50")
+    @Max(value = 300, message = "Не больше 300")
     private float height;
     private boolean gender;
+    @NotNull(message = "Заполните дату")
     private Date birthday;
+    @NotNull(message = "Заполните вес")
+    @Min(value = 20, message = "Не меньше 20")
+    @Max(value = 300, message = "Не больше 300")
     private double weight;
     private int views;
 

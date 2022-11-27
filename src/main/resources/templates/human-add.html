@@ -16,6 +16,7 @@
         <th>Мужчина</th>
         <th>Дата рождения</th>
         <th>Вес</th>
+        <th>Паспорт</th>
     </tr>
         <tr>
             <td>
@@ -37,6 +38,13 @@
             <td>
                 <input type="number" name="weight" placeholder="Вес">
                 <div style="color: red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"/>
+            </td>
+            <td>
+                <select  name="number">
+                    <div th:each="element : ${pasport}">
+                        <option th:text="${element.number}"></option>
+                    </div>
+                </select>
             </td>
         </tr>
 

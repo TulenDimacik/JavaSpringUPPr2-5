@@ -1,11 +1,9 @@
 package com.example.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 public class Human {
@@ -29,12 +27,23 @@ public class Human {
     private double weight;
     private int views;
 
-    public Human(String lastName, float height, boolean gender, Date birthday, double weight) {
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name="pasport_id")
+    private Pasport pasport;
+
+    @ManyToMany
+    @JoinTable (name="student_university",
+            joinColumns=@JoinColumn (name="student_id"),
+            inverseJoinColumns=@JoinColumn(name="university_id"))
+    private List<University> universities;
+
+    public Human(String lastName, float height, boolean gender, Date birthday, double weight, Pasport pasport) {
         this.lastName = lastName;
         this.height = height;
         this.gender = gender;
         this.birthday = birthday;
         this.weight = weight;
+        this.pasport = pasport;
     }
 
     public Human() {
@@ -96,4 +105,21 @@ public class Human {
     public void setViews(int views) {
         this.views = views;
     }
+
+    public Pasport getPasport() {
+        return pasport;
+    }
+
+    public void setPasport(Pasport pasport) {
+        this.pasport = pasport;
+    }
+
+    public List<University> getUniversities() {
+        return universities;
+    }
+
+    public void setUniversities(List<University> universities) {
+        this.universities = universities;
+    }
+
 }

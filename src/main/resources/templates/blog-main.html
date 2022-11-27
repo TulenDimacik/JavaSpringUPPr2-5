@@ -16,6 +16,9 @@
     <a th:text="${el.title}"></a>
     <a th:text="${el.full_text}"></a>
     <a th:text="${el.countReaders}"></a>
+    <from th:each="addr : ${el.getAddress()}">
+    <a th:text="${addr.getStreet()}"></a>
+    </from>
     <br>
     <a th:href="'/blog/' + ${el.id}">Подробнее</a>
 </div>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавление унверситета челику</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body >
+<div class=ex1><h1>Добавление университета ччелику</h1></div>
+<div align="center">
+<form th:action="${'/human/university/add'}" method="post">
+    <select  name="human">
+        <div th:each="element : ${humans}">
+            <option th:value="${element.id}" th:text="${element.lastName}"></option>
+        </div>
+    </select>
+    <select  name="universiti">
+        <div th:each="element : ${universities}">
+            <option th:value="${element.id}" th:text="${element.name}"></option>
+        </div>
+    </select>
+    <br>
+    <button type="submit">Добавить уник челику</button>
+</form>
+</div>
+</body>
+<footer>
+    <div th:insert="blocks/footer" ></div>
+</footer>
+</html>

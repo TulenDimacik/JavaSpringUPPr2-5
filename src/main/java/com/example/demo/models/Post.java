@@ -2,10 +2,7 @@ package com.example.demo.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.sql.Date;
@@ -13,12 +10,13 @@ import java.sql.Date;
 @Entity
 public class Post {
 
-    public Post(double title, boolean anons, String full_text, Date dateAnons, int countReaders) {
+    public Post(double title, boolean anons, String full_text, Date dateAnons, int countReaders, Address address) {
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
         this.dateAnons = dateAnons;
         this.countReaders = countReaders;
+        this.address = address;
     }
 
     public Post() {
@@ -42,6 +40,8 @@ public class Post {
     @Max(value = 10, message = "Не больше 10")
     private int countReaders;
     private int views;
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
+    private Address address;
 
     public Long getId() {
         return id;
@@ -94,6 +94,15 @@ public class Post {
     public void setViews(int views) {
         this.views = views;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 
 
 }

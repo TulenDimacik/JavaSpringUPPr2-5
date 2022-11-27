@@ -37,6 +37,13 @@
     <div style="color: red" th:if="${#fields.hasErrors('countReaders')}" th:errors="*{countReaders}"></div>
   </div>
       </td>
+        <td>
+            <select  name="street">
+                <div th:each="element : ${address}">
+                    <option th:text="${element.street}"></option>
+                </div>
+            </select>
+        </td>
     </tr>
   </table>
   <br>

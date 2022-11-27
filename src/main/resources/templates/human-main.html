@@ -19,6 +19,8 @@
     <th>Мужчина</th>
     <th>Дата рождения</th>
     <th>Вес</th>
+    <th>Паспорт</th>
+    <th>Университеты</th>
   </tr> <!--ряд с ячейками заголовков-->
   <tr th:each="el : ${humans}">
     <td th:text="${el.lastName}"></td>
@@ -26,6 +28,23 @@
     <td th:text="${el.gender}" ></td>
     <td th:text="${el.birthday}"></td>
     <td th:text="${el.weight}"></td>
+    <td>
+      <from th:each="pasp : ${el.getPasport()}">
+        <p th:text="${pasp.getNumber()}"/>
+      </from>
+    </td>
+    <td>
+      <form th:each="univ : ${el.getUniversities()}">
+      <div>
+        <a th:text="${univ.getName()}"/>
+        <a th:href="'human/'+ ${el.id} + '/'+ ${univ.id} + '/remove'">Исключить</a>
+      </div>
+      </form>
+    </td>
+<!--    <form th:each="univ : ${el.getUniversities()}">-->
+<!--      <td th:text="${univ.getName()}"></td>-->
+<!--      <td><a th:href="'human/'+ ${el.id} + '/'+ ${univ.id} + '/remove'" class="delete">Исключить</a></td>-->
+<!--    </form>-->
     <td><a th:href="'/human/' + ${el.id} + '/edit'" class="edit">Редактировать</a></td>
     <td><a th:href="'/human/' + ${el.id} + '/remove'" class="delete">Удалить</a></td>
   </tr>
@@ -35,6 +54,8 @@
 </table>
 <p></p>
 <center><a href="/human/add" class="button7">Создать</a></center>
+<br>
+<center><a href="/human/university/add" class="button7">Отправить в университет</a></center>
 </body>
 <footer>
   <div th:insert="blocks/footer" ></div>
